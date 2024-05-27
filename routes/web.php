@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/location', function () {
         return view('pages.location_page.index');
     })->name('location');
+
+    Route::get('/location/maps', [MapController::class, 'index'])->name('maps');
 });
 
 Route::middleware('auth')->group(function () {
