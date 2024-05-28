@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -12,9 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('pages.home_page.index');
     })->name('dashboard');
 
-    Route::get('/location', function () {
-        return view('pages.location_page.index');
-    })->name('location');
+    Route::get('/location', [MapController::class, 'index'])->name('location');
 });
 
 Route::middleware('auth')->group(function () {
