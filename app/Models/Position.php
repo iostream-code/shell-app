@@ -8,4 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class Position extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'lat',
+        'lng',
+    ];
+
+    public function office()
+    {
+        return $this->hasOne(BranchOffice::class);
+    }
 }
