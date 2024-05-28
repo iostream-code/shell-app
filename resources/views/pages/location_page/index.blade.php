@@ -40,14 +40,15 @@
 
     /* --------------------------- Initialize Markers --------------------------- */
     function initMarkers() {
-        const initialMarkers = <?php echo json_encode($initialMarkers); ?>;
+        const offices = <?php echo json_encode($offices); ?>;
 
-        for (let index = 0; index < initialMarkers.length; index++) {
+        for (let index = 0; index < offices.length; index++) {
 
-            const data = initialMarkers[index];
+            const data = offices[index];
             const marker = generateMarker(data, index);
 
-            marker.addTo(map).bindPopup(`<b>${data.code}</b> <br/> ${data.operation_hours}`);
+            marker.addTo(map).bindPopup(
+                `<b>Shell-${data.code}</b> <br/> ${data.address} <br/> Open ${data.operation_hours}`);
             map.panTo(data.position);
             markers.push(marker)
         }
@@ -55,7 +56,7 @@
 
     function generateMarker(data, index) {
         return L.marker(data.position, {
-                draggable: data.draggable
+                draggable: false
             })
             .on('click', (event) => markerClicked(event, index))
             .on('dragend', (event) => markerDragEnd(event, index));
