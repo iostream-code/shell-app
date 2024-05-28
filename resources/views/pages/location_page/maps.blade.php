@@ -837,9 +837,6 @@
 </head>
 
 <body class="antialiased">
-    <div>
-        {{ json_encode($initialMarkers) }}
-    </div>
     <div
         class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
         <div class="max-w-7xl mx-auto p-6 lg:p-8">
@@ -866,8 +863,8 @@
     function initMap() {
         map = L.map('map', {
             center: {
-                lat: -7.7925927,
-                lng: 110.3658812,
+                lat: -7.24525826398554,
+                lng: 112.73866968465657,
             },
             zoom: 13
         });

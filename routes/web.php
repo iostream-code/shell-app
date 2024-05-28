@@ -13,11 +13,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('pages.home_page.index');
     })->name('dashboard');
 
-    Route::get('/location', function () {
-        return view('pages.location_page.index');
-    })->name('location');
-
-    Route::get('/location/maps', [MapController::class, 'index'])->name('maps');
+    Route::get('/location', [MapController::class, 'index'])->name('location');
 });
 
 Route::middleware('auth')->group(function () {
