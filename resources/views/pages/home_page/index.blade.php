@@ -15,7 +15,7 @@
                 </svg>
                 <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        12 otlet
+                        {{ $offices->count() }} otlet
                     </h5>
                 </a>
                 <div class="flex flex-row justify-between font-normal text-gray-500 dark:text-gray-400">
@@ -39,7 +39,7 @@
                 </svg>
                 <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        12 otlet
+                        203 karyawan
                     </h5>
                 </a>
                 <div class="flex flex-row justify-between font-normal text-gray-500 dark:text-gray-400">
@@ -63,7 +63,7 @@
                 </svg>
                 <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        12 otlet
+                        1.458 pelanggan
                     </h5>
                 </a>
                 <div class="flex flex-row justify-between font-normal text-gray-500 dark:text-gray-400">
@@ -87,7 +87,7 @@
                 </svg>
                 <a href="#">
                     <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                        12 otlet
+                        48.000 L/hari
                     </h5>
                 </a>
                 <div class="flex flex-row justify-between font-normal text-gray-500 dark:text-gray-400">
@@ -111,7 +111,8 @@
         <div class="max-w-sm w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
             <div class="flex justify-between mb-3">
                 <div class="flex justify-center items-center">
-                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">Website traffic</h5>
+                    <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white pe-1">Fuel Sales Traffic
+                    </h5>
                     <svg data-popover-target="chart-info" data-popover-placement="bottom"
                         class="w-3.5 h-3.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white cursor-pointer ms-1"
                         aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
@@ -163,20 +164,26 @@
                     <div class="flex items-center me-4">
                         <input id="desktop" type="checkbox" value="desktop"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="desktop"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Desktop</label>
+                        <label for="desktop" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Shell
+                            Super</label>
                     </div>
                     <div class="flex items-center me-4">
                         <input id="tablet" type="checkbox" value="tablet"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="tablet"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Tablet</label>
+                        <label for="tablet" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Shell
+                            V-Power</label>
                     </div>
                     <div class="flex items-center me-4">
                         <input id="mobile" type="checkbox" value="mobile"
                             class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                        <label for="mobile"
-                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Mobile</label>
+                        <label for="mobile" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Shell
+                            V-Power Diesel</label>
+                    </div>
+                    <div class="flex items-center me-4">
+                        <input id="desktop" type="checkbox" value="desktop"
+                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                        <label for="desktop" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Shell
+                            Diesel Extra</label>
                     </div>
                 </div>
             </div>
@@ -244,12 +251,12 @@
         <div class="w-full bg-white rounded-lg shadow dark:bg-gray-800 p-4 md:p-6">
             <div class="flex justify-between">
                 <div>
-                    <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">32.4k</h5>
-                    <p class="text-base font-normal text-gray-500 dark:text-gray-400">Users this week</p>
+                    <h5 class="leading-none text-3xl font-bold text-gray-900 dark:text-white pb-2">2.1k</h5>
+                    <p class="text-base font-normal text-gray-500 dark:text-gray-400">Customers this week</p>
                 </div>
                 <div
                     class="flex items-center px-2.5 py-0.5 text-base font-semibold text-green-500 dark:text-green-500 text-center">
-                    12%
+                    2%
                     <svg class="w-3 h-3 ms-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                         viewBox="0 0 10 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -346,7 +353,7 @@
                             total: {
                                 showAlways: true,
                                 show: true,
-                                label: "Unique visitors",
+                                label: "Profits gained",
                                 fontFamily: "Inter, sans-serif",
                                 formatter: function(w) {
                                     const sum = w.globals.seriesTotals.reduce((a, b) => {
@@ -373,7 +380,7 @@
                     top: -2,
                 },
             },
-            labels: ["Direct", "Sponsor", "Affiliate", "Email marketing"],
+            labels: ["Sold", "Revenue", "Refill", "Promo applied"],
             dataLabels: {
                 enabled: false,
             },
@@ -485,8 +492,8 @@
             },
         },
         series: [{
-            name: "New users",
-            data: [6500, 6418, 6456, 6526, 6356, 6456],
+            name: "New Customer",
+            data: [65, 18, 45, 52, 35, 46],
             color: "#1A56DB",
         }, ],
         xaxis: {
