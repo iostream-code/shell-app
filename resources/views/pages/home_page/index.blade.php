@@ -6,7 +6,7 @@
     </x-slot>
 
     <div class="w-full py-12">
-        <div class="max-w-7xl mx-auto flex flex-row justify-between"> {{-- sm:px-6 lg:px-8 --}}
+        <div class="max-w-7xl mx-auto flex flex-row justify-between">
             <div class="w-72 p-4 bg-white rounded-lg">
                 <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 mb-3" aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
