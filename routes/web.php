@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BranchOfficeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\ProfileController;
@@ -12,6 +13,7 @@ Route::get('/', function () {
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/location', [MapController::class, 'index'])->name('location');
+    Route::post('/location/add', [BranchOfficeController::class, 'store'])->name('location_store');
 });
 
 Route::middleware('auth')->group(function () {

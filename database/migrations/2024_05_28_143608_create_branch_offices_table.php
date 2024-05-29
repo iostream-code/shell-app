@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('position_id')->references('id')->on('positions')->cascadeOnDelete();
             $table->string('code')->nullable(false);
             $table->text('address');
-            $table->string('open_hours');
+            $table->string('open_hours')->default('24 hours');
             $table->timestamps();
         });
     }
