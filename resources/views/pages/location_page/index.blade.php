@@ -123,34 +123,19 @@
             marker.addTo(map).bindPopup(
                 `<div class="text-lg font-bold">Shell-${data.code}</div> ${data.address} <br/> <div class="font-semibold">Opens <span class="text-green-700">${data.open_hours}</span></div>`
             );
-            // map.panTo(data.position);
             markers.push(marker)
         }
     }
 
     function generateMarker(data, index) {
         return L.marker(data.position, {
-                draggable: false
-            })
-            .on('click', (event) => markerClicked(event, index))
-            .on('dragend', (event) => markerDragEnd(event, index));
+            draggable: false
+        });
     }
 
     /* ------------------------- Handle Map Click Event ------------------------- */
     function mapClicked($event) {
         console.log(map);
         console.log($event.latlng.lat, $event.latlng.lng);
-    }
-
-    /* ------------------------ Handle Marker Click Event ----------------------- */
-    function markerClicked($event, index) {
-        console.log(map);
-        console.log($event.latlng.lat, $event.latlng.lng);
-    }
-
-    /* ----------------------- Handle Marker DragEnd Event ---------------------- */
-    function markerDragEnd($event, index) {
-        console.log(map);
-        console.log($event.target.getLatLng());
     }
 </script>
