@@ -82,8 +82,12 @@ class BranchOfficeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BranchOffice $branchOffice)
+    public function destroy($id)
     {
-        //
+        $office = BranchOffice::where('id', $id)->get();
+        dd($office);
+        $office->delete();
+
+        return redirect()->route('location');
     }
 }

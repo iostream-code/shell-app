@@ -14,6 +14,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('dashboard');
     Route::get('/location', [MapController::class, 'index'])->name('location');
     Route::post('/location/add', [BranchOfficeController::class, 'store'])->name('location_store');
+    Route::delete('/location/{id}/delete', [BranchOfficeController::class, 'destroy'])->name('location_delete');
 });
 
 Route::middleware('auth')->group(function () {

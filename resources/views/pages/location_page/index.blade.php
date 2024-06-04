@@ -123,7 +123,15 @@
             const marker = generateMarker(data, index);
 
             marker.addTo(map).bindPopup(
-                `<div class="text-lg font-bold">Shell-${data.code}</div> ${data.address} <br/> <div class="font-semibold">Opens <span class="text-green-700">${data.open_hours}</span></div>`
+                `<div class="text-lg font-bold">Shell-${data.code}</div> ${data.address} <br/>
+                <div class="flex flex-row justify-between">
+                    <div class="font-semibold">Opens <span class="text-green-700">${data.open_hours}</span></div>
+                    <button type="button" onClick="deleteMarker('${data.id}')" class="text-red-700 hover:bg-red-700 hover:text-white focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm text-center inline-flex items-center me-2 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
+                        <svg class="w-5 h-5 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                        </svg><span class="sr-only">Icon description</span>
+                    </button>
+                </div>`
             );
             markers.push(marker)
         }
@@ -139,5 +147,39 @@
     function mapClicked($event) {
         console.log(map);
         console.log($event.latlng.lat, $event.latlng.lng);
+    }
+
+    /* ------------------------- Function Delete ------------------------------- */
+    function deleteMarker($id) {
+        console.log($id);
+        Swal.fire({
+            title: 'Apakah Kamu Yakin?',
+            text: "ingin menghapus titik ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'TIDAK',
+            confirmButtonText: 'YA, HAPUS!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Menghapus titik...", "", 'success');
+                console.log($id);
+                $.ajax({
+                    url: '/location/' + $id + '/delete',
+                    type: 'POST',
+                    cache: false,
+                    success: function() {
+                        Swal.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: 'Titik berhasil dihapus!',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                });
+            } else if (result.isDenied) {
+                Swal.fire("Proses gagal!", "", "info");
+            }
+        });
     }
 </script>
