@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BranchOffice;
+use App\Models\Position;
 use Illuminate\Http\Request;
 
 class BranchOfficeController extends Controller
@@ -28,7 +29,30 @@ class BranchOfficeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'code' => 'required',
+            'address' => 'required',
+        ], [
+            'code.required' => 'Pastikan mengisi kolom ini',
+            'address.required' => 'Pastikan mengisi kolom ini',
+        ]);
+
+        $location = Position::create([
+            'lat' => $request->lat,
+            'lng' => $request->lng,
+        ]);
+
+        if ($location) {
+            BranchOffice::create([
+                'position_id' => $location->id,
+                'code' => $request->code,
+                'address' => $request->address,
+            ]);
+
+            return redirect()->route('location');
+        }
+
+        return response()->json(['Periksa kembali data Anda!', 422]);
     }
 
     /**
@@ -58,8 +82,12 @@ class BranchOfficeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(BranchOffice $branchOffice)
+    public function destroy($id)
     {
-        //
+        $office = BranchOffice::where('id', $id)->get();
+        dd($office);
+        $office->delete();
+
+        return redirect()->route('location');
     }
 }

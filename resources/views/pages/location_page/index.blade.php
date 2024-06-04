@@ -46,12 +46,14 @@
                         </div>
                         <div class="hidden rounded-lg" id="marker" role="tabpanel" aria-labelledby="marker-tab">
 
-                            <form class="max-w-sm mx-auto flex flex-col">
+                            <form action="{{ route('location_store') }}" class="max-w-sm mx-auto flex flex-col"
+                                method="post">
+                                @csrf
                                 <div class="mb-4">
                                     <label for="code"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shell
                                         Code</label>
-                                    <input type="code" id="code" aria-describedby="helper-text-explanation"
+                                    <input type="text" name="code" aria-describedby="helper-text-explanation"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="ex: bendul merisi">
                                 </div>
@@ -59,24 +61,24 @@
                                     <label for="address"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Shell
                                         Address</label>
-                                    <input type="address" id="address" aria-describedby="helper-text-explanation"
+                                    <input type="text" name="address" aria-describedby="helper-text-explanation"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                         placeholder="ex: st. bendul merisi">
                                 </div>
                                 <div class="mb-4">
-                                    <label for="address"
+                                    <label for="location"
                                         class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Position
                                         <span class="text-xs text-gray-500">latitude, longitude</span><span
                                             class="text-red-700">*</span></label>
                                     <div class="flex flex-row items-center gap-2">
                                         <div>
-                                            <input type="address" id="address"
+                                            <input type="text" name="lat"
                                                 aria-describedby="helper-text-explanation"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="ex: -7.9082xx"required>
                                         </div>
                                         <div>
-                                            <input type="address" id="address"
+                                            <input type="text" name="lng"
                                                 aria-describedby="helper-text-explanation"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="ex: 112.5412xx" required>
@@ -121,7 +123,15 @@
             const marker = generateMarker(data, index);
 
             marker.addTo(map).bindPopup(
-                `<div class="text-lg font-bold">Shell-${data.code}</div> ${data.address} <br/> <div class="font-semibold">Opens <span class="text-green-700">${data.open_hours}</span></div>`
+                `<div class="text-lg font-bold">Shell-${data.code}</div> ${data.address} <br/>
+                <div class="flex flex-row justify-between">
+                    <div class="font-semibold">Opens <span class="text-green-700">${data.open_hours}</span></div>
+                    <button type="button" onClick="deleteMarker('${data.id}')" class="text-red-700 hover:bg-red-700 hover:text-white focus:ring-2 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm text-center inline-flex items-center me-2 dark:text-red-500 dark:hover:text-white dark:focus:ring-red-800 dark:hover:bg-red-500">
+                        <svg class="w-5 h-5 text-white-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"/>
+                        </svg><span class="sr-only">Icon description</span>
+                    </button>
+                </div>`
             );
             markers.push(marker)
         }
@@ -137,5 +147,39 @@
     function mapClicked($event) {
         console.log(map);
         console.log($event.latlng.lat, $event.latlng.lng);
+    }
+
+    /* ------------------------- Function Delete ------------------------------- */
+    function deleteMarker($id) {
+        console.log($id);
+        Swal.fire({
+            title: 'Apakah Kamu Yakin?',
+            text: "ingin menghapus titik ini!",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'TIDAK',
+            confirmButtonText: 'YA, HAPUS!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire("Menghapus titik...", "", 'success');
+                console.log($id);
+                $.ajax({
+                    url: '/location/' + $id + '/delete',
+                    type: 'POST',
+                    cache: false,
+                    success: function() {
+                        Swal.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: 'Titik berhasil dihapus!',
+                            showConfirmButton: false,
+                            timer: 3000
+                        });
+                    }
+                });
+            } else if (result.isDenied) {
+                Swal.fire("Proses gagal!", "", "info");
+            }
+        });
     }
 </script>
